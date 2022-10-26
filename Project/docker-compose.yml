@@ -1,0 +1,28 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - .:/application
+      - ./database/db.sql:/docker-entrypoint-initdb.d/db.sql
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=Greyabu@201
+      - MYSQL_DATABASE=imployee
+  imployee:
+    container_name: imployee
+    build: .
+    ports:
+      - "80:5000"
+    volumes:
+      - ./:/app
+    environment:
+      FLASK_ENV: development
+    restart: always
+    depends_on:
+      - mysql
+    links:
+      - mysql

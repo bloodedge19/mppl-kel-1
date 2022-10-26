@@ -15,7 +15,7 @@ def do_login():
 		cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
 		cursor.execute('SELECT * FROM employees where email = %s', (email, ))
 		rv = cursor.fetchone()
-		print(rv)
+		print(rv, flush=True)
 		if bcrypt.check_password_hash(rv['password'], password):
 			session['loggedin'] = True
 			session['id'] = rv['employee_id']
@@ -51,10 +51,12 @@ def register():
 			cursor.execute('INSERT INTO employees VALUES (NULL, %s, %s, %s, %s, 0)', (data['email'], password, data['fullname'], data['salary'], ))
 			mysql.commit()
 			msg = 'You have successfully registered !'
+			cursor.close()
+			mysql.close()
 	elif request.method == 'POST':
 		msg = 'Please fill out the form !'
-	cursor.close()
-	mysql.close()
+		cursor.close()
+		mysql.close()
 	return render_template('register.html', msg = msg)
 
 @app.route('/logout')
