@@ -6,3 +6,8 @@
 - Daffa Muhammad Subhan G64190013
 - Siti Magfiroh G64190042
 - Muhammad Alfarizhi G64190087
+
+# About iMployee
+Sebuah aplikasi untuk memudahkan karyawan dan HR
+dalam mengelola keuangan sehingga sistem penggajian lebih mudah
+dan efisien 
