@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+  <>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance</title>
+    <link rel="stylesheet" href="attendance.css" />
+  
+
+</head>
+  <body>
+    <div class="grid-container">
+      <div class="menu-icon">
+        <strong> &#9776;</strong>
+      </div>
+      <header class="header">
+        <div class="container-search-box">
+          <form action="" method="get" class="search-box">
+            <input type="text" placeholder="search anything" name="q" />
+            <button type="submit"><img src="img3/search.svg" alt="search" /></button>
+          </form>
+        </div>
+
+        <a href="#" class="lonceng"
+          ><svg width="24" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M9.528 2.33a2.667 2.667 0 0 1 4.944 0 9.337 9.337 0 0 1 6.861 9.003v6.263l2.443 3.664a1.334 1.334 0 0 1-1.11 2.073H16.62a4.669 4.669 0 0 1-9.24 0H1.333A1.334 1.334 0 0 1 .224 21.26l2.443-3.664v-6.263a9.337 9.337 0 0 1 6.861-9.002Zm.587 21.003a2 2 0 0 0 3.772 0h-3.774.002ZM12 4.667a6.667 6.667 0 0 0-6.667 6.666V18c0 .263-.078.52-.224.74l-1.284 1.927h16.348L18.89 18.74a1.333 1.333 0 0 1-.222-.74v-6.667A6.667 6.667 0 0 0 12 4.667Z"
+              fill="#666"
+            /></svg
+        ></a>
+
+        <div class="profil">
+          <a href="#" class="profil-picture"> <img src="img3/profil .svg" alt="profil-picture" /> </a>
+          <div class="profil-name">Daffa Muhammad Subhan</div>
+          <div class="profil-nim">1300078</div>
+          <div class="dropdown">
+            <button onclick="myFunction()" class="panah-bawah">
+              <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.666626 1L5.99996 6.33333L11.3333 1" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <div id="myDropdown" class="dropdown-content">
+              <a href="#"
+                ><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M1 12C1 12 0 12 0 11C0 10 1 7 6 7C11 7 12 10 12 11C12 12 11 12 11 12H1ZM6 6C6.79565 6 7.55871 5.68393 8.12132 5.12132C8.68393 4.55871 9 3.79565 9 3C9 2.20435 8.68393 1.44129 8.12132 0.87868C7.55871 0.316071 6.79565 0 6 0C5.20435 0 4.44129 0.316071 3.87868 0.87868C3.31607 1.44129 3 2.20435 3 3C3 3.79565 3.31607 4.55871 3.87868 5.12132C4.44129 5.68393 5.20435 6 6 6Z"
+                    fill="white"
+                  />
+                </svg>
+                My Profile</a
+              >
+              <a href="#"
+                ><svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M2.288 0.857117C1.71968 0.857117 1.17463 1.08288 0.77277 1.48475C0.370906 1.88661 0.145142 2.43165 0.145142 2.99997V3.42855H13.8571V2.99997C13.8571 2.43165 13.6314 1.88661 13.2295 1.48475C12.8277 1.08288 12.2826 0.857117 11.7143 0.857117H2.28857H2.288ZM0.145142 8.99997V4.28569H13.8571V8.99997C13.8571 9.5683 13.6314 10.1133 13.2295 10.5152C12.8277 10.9171 12.2826 11.1428 11.7143 11.1428H2.28857C1.72025 11.1428 1.17521 10.9171 0.773341 10.5152C0.371478 10.1133 0.145713 9.5683 0.145713 8.99997H0.145142ZM9.42857 7.42855C9.31491 7.42855 9.2059 7.4737 9.12552 7.55407C9.04515 7.63444 9 7.74345 9 7.85712C9 7.97078 9.04515 8.07979 9.12552 8.16016C9.2059 8.24054 9.31491 8.28569 9.42857 8.28569H11.4286C11.5422 8.28569 11.6512 8.24054 11.7316 8.16016C11.812 8.07979 11.8571 7.97078 11.8571 7.85712C11.8571 7.74345 11.812 7.63444 11.7316 7.55407C11.6512 7.4737 11.5422 7.42855 11.4286 7.42855H9.42857Z"
+                    fill="white"
+                  />
+                </svg>
+                Payroll</a
+              >
+              <a href="#"
+                ><svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M15.5312 6.53124L10.2812 11.7812C9.8125 12.25 9 11.9219 9 11.25V8.24999H4.75C4.33437 8.24999 4 7.91562 4 7.49999V4.49999C4 4.08437 4.33437 3.74999 4.75 3.74999H9V0.749993C9 0.0812433 9.80937 -0.250007 10.2812 0.218743L15.5312 5.46874C15.8219 5.76249 15.8219 6.23749 15.5312 6.53124ZM6 11.625V10.375C6 10.1687 5.83125 9.99999 5.625 9.99999H3C2.44688 9.99999 2 9.55312 2 8.99999V2.99999C2 2.44687 2.44688 1.99999 3 1.99999H5.625C5.83125 1.99999 6 1.83124 6 1.62499V0.374993C6 0.168743 5.83125 -6.74365e-06 5.625 -6.74365e-06H3C1.34375 -6.74365e-06 0 1.34374 0 2.99999V8.99999C0 10.6562 1.34375 12 3 12H5.625C5.83125 12 6 11.8312 6 11.625Z"
+                    fill="white"
+                  />
+                </svg>
+                Log Out</a
+              >
+            </div>
+          </div>
+        </div>
+      </header>
+      <aside class="aside">
+        <div class="aside_close-icon">
+          <strong>&times;</strong>
+        </div>
+        <a href="#" class="logo">iMployee</a>
+        <ul class="aside_list">
+          <li class="aside_list-item">
+            <a href="#" class="menu-link">
+              <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M6.667 1.667H3.333c-.92 0-1.666.746-1.666 1.666v13.334c0 .92.746 1.666 1.666 1.666h3.334c.92 0 1.666-.746 1.666-1.666V3.333c0-.92-.746-1.666-1.666-1.666ZM16.667 1.667h-3.334c-.92 0-1.666.746-1.666 1.666v3.334c0 .92.746 1.666 1.666 1.666h3.334c.92 0 1.666-.746 1.666-1.666V3.333c0-.92-.746-1.666-1.666-1.666ZM16.667 11.667h-3.334c-.92 0-1.666.746-1.666 1.666v3.334c0 .92.746 1.666 1.666 1.666h3.334c.92 0 1.666-.746 1.666-1.666v-3.334c0-.92-.746-1.666-1.666-1.666Z"
+                  stroke="#616161"
+                  stroke-width="1.333"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Dashboard</a
+            >
+          </li>
+          <li class="aside_list-item">
+            <a href="#" class="menu-link">
+              <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M5.5 4.875a.625.625 0 0 0-1.25 0v6.25a.625.625 0 1 0 1.25 0v-6.25Zm3.125 0a.625.625 0 0 0-1.25 0v6.25a.625.625 0 1 0 1.25 0v-6.25Zm3.125 0a.625.625 0 1 0-1.25 0v6.25a.624.624 0 1 0 1.25 0v-6.25Zm3.75-1.25A3.125 3.125 0 0 0 12.375.5h-8.75A3.125 3.125 0 0 0 .5 3.625v8.75A3.125 3.125 0 0 0 3.625 15.5h8.75a3.125 3.125 0 0 0 3.125-3.125v-8.75Zm-13.75 8.75v-8.75A1.875 1.875 0 0 1 3.625 1.75h8.75a1.875 1.875 0 0 1 1.875 1.875v8.75a1.875 1.875 0 0 1-1.875 1.875h-8.75a1.875 1.875 0 0 1-1.875-1.875Z"
+                  fill="#666"
+                />
+              </svg>
+              Attendance</a
+            >
+          </li>
+          <li class="aside_list-item">
+            <a href="#" class="menu-link"
+              ><svg width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M9 .667C4.405.667.667 4.405.667 9c0 4.595 3.738 8.333 8.333 8.333 4.595 0 8.333-3.738 8.333-8.333C17.333 4.405 13.595.667 9 .667Zm0 15A6.675 6.675 0 0 1 2.333 9 6.674 6.674 0 0 1 9 2.333 6.674 6.674 0 0 1 15.667 9 6.674 6.674 0 0 1 9 15.667Z"
+                  fill="#616161"
+                />
+              </svg>
+              Overtime</a
+            >
+          </li>
+          <li class="aside_list-item">
+            <a href="#" class="menu-link"
+              ><svg width="20" height="15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.333 1.167H2.5A.833.833 0 0 0 1.667 2v10.833a.833.833 0 0 0 .833.834h15a.833.833 0 0 0 .833-.834v-1.041" stroke="#616161" stroke-width="1.667" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M4.167 6.583H7.5M4.167 9.917h10" stroke="#616161" stroke-width="1.667" stroke-linecap="round" />
+                <path d="M14.167 6.167a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM18.333 8.841c-.813-1.59-2.5-2.674-4.166-2.674-1.667 0-2.497.472-3.354 1.25" stroke="#616161" stroke-width="1.667" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              Permit</a
+            >
+          </li>
+          <li class="aside_list-item">
+            <a href="#" class="menu-link"
+              ><svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M7 9a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm2-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2ZM3.5 4A1.5 1.5 0 0 0 2 5.5v7A1.5 1.5 0 0 0 3.5 14h11a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 14.5 4h-11ZM3 5.5a.5.5 0 0 1 .5-.5H5v1a1 1 0 0 1-1 1H3V5.5ZM3 8h1a2 2 0 0 0 2-2V5h6v1a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v1H6v-1a2 2 0 0 0-2-2H3V8Zm10-3h1.5a.5.5 0 0 1 .5.5V7h-1a1 1 0 0 1-1-1V5Zm2 6v1.5a.5.5 0 0 1-.5.5H13v-1a1 1 0 0 1 1-1h1ZM5 13H3.5a.5.5 0 0 1-.5-.5V11h1a1 1 0 0 1 1 1v1Zm12-.5a2.5 2.5 0 0 1-2.5 2.5H4.085A1.5 1.5 0 0 0 5.5 16h9a3.5 3.5 0 0 0 3.5-3.5v-5a1.5 1.5 0 0 0-1-1.415V12.5Z"
+                  fill="#616161"
+                />
+              </svg>
+              Reimbursement</a
+            >
+          </li>
+        </ul>
+      </aside>
+      <main class="main">
+        <div class="sub-main">
+          <left class="left">
+            <div class="title">Attendance</div>
+  
+            <div class="calendar">
+                <div class="calendar-header">
+                    <span class="month-picker" id="month-picker">February</span>
+                    <div class="year-picker">
+                        <span class="year-change" id="prev-year">
+                            <pre><</pre>
+                        </span>
+                        <span id="year">2021</span>
+                        <span class="year-change" id="next-year">
+                            <pre>></pre>
+                        </span>
+                    </div>
+                </div>
+                <div class="calendar-body">
+                    <div class="calendar-week-day">
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                    </div>
+                    <div class="calendar-days"></div>
+                </div>
+
+                <div class="month-list"></div>
+            </div>
+        
+            <script src="attendance.js"></script>
+
+            <form >
+            <label class="condition" for="condition">Condition :</label>
+            <select id="condition" name="condition">
+              <option value="Healthy">Healthy</option>
+              <option value="Sick">Sick</option>                 
+            </select>
+
+           
+              <label class="appt" for="appt">Start time:</label>
+              <input type="time" id="appt" name="appt">
+
+              <label for="" class="activity">Activity</label>
+              <input type="text" id="activity">
+
+              <input input="submit_attendance" type="submit" value="Clock in">
+
+
+            </form>
+
+          </left>
+
+
+          
+          <right class="right">
+
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Start time</th>
+                  <th>End time</th>
+                  <th>Working hours</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>20/9/2022</td>
+                  <td>07:00pm</td>
+                  <td>10:35pm</td>
+                  <td>3 hours 35m</td>
+                  <td>
+                    <div class="table-dropdown">
+                      <button onclick="MyArrow()" class="table-arrow-1">
+                        <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1.54041 11L8.64025 6L1.54041 1" stroke="#262727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </button>
+                      <div class="InsideArrow" id="InArrow">
+                        <table class="in-arrow">
+                          <thead class="thead-in-arrow">
+                            <tr>
+                              <th colspan="3">Overtime</th>
+                              <th>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M10 10L6 6M10 6L6 10" stroke="#84888F" stroke-width="1.33333" stroke-linecap="round" />
+                                  <path
+                                    d="M8.00016 14.6667C11.6821 14.6667 14.6668 11.6819 14.6668 8.00004C14.6668 4.31814 11.6821 1.33337 8.00016 1.33337C4.31826 1.33337 1.3335 4.31814 1.3335 8.00004C1.3335 11.6819 4.31826 14.6667 8.00016 14.6667Z"
+                                    stroke="#84888F"
+                                    stroke-width="1.33333"
+                                  />
+                                </svg>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path
+                                    d="M6.445 11.688V6.354H5.812C5.35864 6.59567 4.92049 6.86484 4.5 7.16V7.855C4.875 7.598 5.469 7.235 5.758 7.078H5.77V11.688H6.445ZM7.633 10.383C7.68 11.023 8.227 11.789 9.336 11.789C10.594 11.789 11.336 10.723 11.336 8.918C11.336 6.984 10.555 6.25 9.383 6.25C8.457 6.25 7.586 6.922 7.586 8.059C7.586 9.219 8.41 9.829 9.262 9.829C10.008 9.829 10.492 9.453 10.645 9.039H10.672C10.668 10.355 10.211 11.203 9.367 11.203C8.703 11.203 8.359 10.753 8.317 10.383H7.633ZM10.586 8.066C10.586 8.762 10.027 9.246 9.402 9.246C8.801 9.246 8.258 8.863 8.258 8.046C8.258 7.223 8.84 6.836 9.426 6.836C10.059 6.836 10.586 7.234 10.586 8.066Z"
+                                    fill="#84888F"
+                                  />
+                                  <path
+                                    d="M3.5 0C3.63261 0 3.75979 0.0526784 3.85355 0.146447C3.94732 0.240215 4 0.367392 4 0.5V1H12V0.5C12 0.367392 12.0527 0.240215 12.1464 0.146447C12.2402 0.0526784 12.3674 0 12.5 0C12.6326 0 12.7598 0.0526784 12.8536 0.146447C12.9473 0.240215 13 0.367392 13 0.5V1H14C14.5304 1 15.0391 1.21071 15.4142 1.58579C15.7893 1.96086 16 2.46957 16 3V14C16 14.5304 15.7893 15.0391 15.4142 15.4142C15.0391 15.7893 14.5304 16 14 16H2C1.46957 16 0.960859 15.7893 0.585786 15.4142C0.210714 15.0391 0 14.5304 0 14V3C0 2.46957 0.210714 1.96086 0.585786 1.58579C0.960859 1.21071 1.46957 1 2 1H3V0.5C3 0.367392 3.05268 0.240215 3.14645 0.146447C3.24021 0.0526784 3.36739 0 3.5 0V0ZM1 4V14C1 14.2652 1.10536 14.5196 1.29289 14.7071C1.48043 14.8946 1.73478 15 2 15H14C14.2652 15 14.5196 14.8946 14.7071 14.7071C14.8946 14.5196 15 14.2652 15 14V4H1Z"
+                                    fill="#84888F"
+                                  />
+                                </svg>
+                              </td>
+                              <td>Date</td>
+                              <td>23 September 2022</td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path
+                                    d="M7.9935 1.33337C4.3135 1.33337 1.3335 4.32004 1.3335 8.00004C1.3335 11.68 4.3135 14.6667 7.9935 14.6667C11.6802 14.6667 14.6668 11.68 14.6668 8.00004C14.6668 4.32004 11.6802 1.33337 7.9935 1.33337ZM8.00016 13.3334C5.0535 13.3334 2.66683 10.9467 2.66683 8.00004C2.66683 5.05337 5.0535 2.66671 8.00016 2.66671C10.9468 2.66671 13.3335 5.05337 13.3335 8.00004C13.3335 10.9467 10.9468 13.3334 8.00016 13.3334ZM7.8535 4.66671H7.8135C7.54683 4.66671 7.3335 4.88004 7.3335 5.14671V8.29337C7.3335 8.52671 7.4535 8.74671 7.66016 8.86671L10.4268 10.5267C10.6535 10.66 10.9468 10.5934 11.0802 10.3667C11.1136 10.3127 11.1359 10.2526 11.1456 10.1898C11.1554 10.127 11.1524 10.0629 11.1368 10.0014C11.1213 9.93977 11.0935 9.88194 11.0551 9.83132C11.0168 9.7807 10.9686 9.73832 10.9135 9.70671L8.3335 8.17337V5.14671C8.3335 4.88004 8.12016 4.66671 7.8535 4.66671V4.66671Z"
+                                    fill="#84888F"
+                                  />
+                                </svg>
+                              </td>
+                              <td>Start time</td>
+                              <td>07:00pm</td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path
+                                    d="M7.9935 1.33337C4.3135 1.33337 1.3335 4.32004 1.3335 8.00004C1.3335 11.68 4.3135 14.6667 7.9935 14.6667C11.6802 14.6667 14.6668 11.68 14.6668 8.00004C14.6668 4.32004 11.6802 1.33337 7.9935 1.33337ZM8.00016 13.3334C5.0535 13.3334 2.66683 10.9467 2.66683 8.00004C2.66683 5.05337 5.0535 2.66671 8.00016 2.66671C10.9468 2.66671 13.3335 5.05337 13.3335 8.00004C13.3335 10.9467 10.9468 13.3334 8.00016 13.3334ZM7.8535 4.66671H7.8135C7.54683 4.66671 7.3335 4.88004 7.3335 5.14671V8.29337C7.3335 8.52671 7.4535 8.74671 7.66016 8.86671L10.4268 10.5267C10.6535 10.66 10.9468 10.5934 11.0802 10.3667C11.1136 10.3127 11.1359 10.2526 11.1456 10.1898C11.1554 10.127 11.1524 10.0629 11.1368 10.0014C11.1213 9.93977 11.0935 9.88194 11.0551 9.83132C11.0168 9.7807 10.9686 9.73832 10.9135 9.70671L8.3335 8.17337V5.14671C8.3335 4.88004 8.12016 4.66671 7.8535 4.66671V4.66671Z"
+                                    fill="#84888F"
+                                  />
+                                </svg>
+                              </td>
+                              <td>End time</td>
+                              <td>09:00pm</td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path
+                                    d="M0 0.333374V4.33337L2.66667 7.00004L0 9.66671V13.6667H8V9.66671L5.33333 7.00004L8 4.33337V0.333374H0ZM6.66667 10V12.3334H1.33333V10L4 7.33337L6.66667 10ZM4 6.66671L1.33333 4.00004V1.66671H6.66667V4.00004L4 6.66671Z"
+                                    fill="#84888F"
+                                  />
+                                </svg>
+                              </td>
+                              <td>Total hours</td>
+                              <td>2 Hours</td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path
+                                    d="M1.83334 11.3334H10.1667C10.2934 11.3334 10.4153 11.3815 10.5079 11.468C10.6004 11.5545 10.6567 11.6729 10.6654 11.7993C10.674 11.9257 10.6343 12.0506 10.5544 12.1489C10.4744 12.2472 10.3602 12.3114 10.2347 12.3287L10.1667 12.3334H1.83334C1.70666 12.3333 1.58472 12.2852 1.49215 12.1987C1.39958 12.1122 1.34329 11.9938 1.33466 11.8675C1.32603 11.7411 1.36569 11.6161 1.44563 11.5178C1.52558 11.4196 1.63984 11.3553 1.76534 11.338L1.83334 11.3334H10.1667H1.83334ZM1.83334 8.66671H14.1667C14.2934 8.66675 14.4153 8.71487 14.5079 8.80136C14.6004 8.88784 14.6567 9.00624 14.6654 9.13263C14.674 9.25902 14.6343 9.38397 14.5544 9.48224C14.4744 9.58051 14.3602 9.64477 14.2347 9.66204L14.1667 9.66671H1.83334C1.70666 9.66667 1.58472 9.61854 1.49215 9.53206C1.39958 9.44557 1.34329 9.32718 1.33466 9.20079C1.32603 9.0744 1.36569 8.94945 1.44563 8.85117C1.52558 8.7529 1.63984 8.68864 1.76534 8.67137L1.83334 8.66671H14.1667H1.83334ZM1.83334 6.00004H14.1667C14.2934 6.00008 14.4153 6.0482 14.5079 6.13469C14.6004 6.22117 14.6567 6.33957 14.6654 6.46596C14.674 6.59235 14.6343 6.7173 14.5544 6.81557C14.4744 6.91384 14.3602 6.97811 14.2347 6.99537L14.1667 7.00004H1.83334C1.70666 7 1.58472 6.95188 1.49215 6.86539C1.39958 6.77891 1.34329 6.66051 1.33466 6.53412C1.32603 6.40773 1.36569 6.28278 1.44563 6.18451C1.52558 6.08624 1.63984 6.02198 1.76534 6.00471L1.83334 6.00004H14.1667H1.83334ZM1.83334 3.33337H14.1667C14.2934 3.33341 14.4153 3.38154 14.5079 3.46802C14.6004 3.55451 14.6567 3.67291 14.6654 3.79929C14.674 3.92568 14.6343 4.05064 14.5544 4.14891C14.4744 4.24718 14.3602 4.31144 14.2347 4.32871L14.1667 4.33337H1.83334C1.70666 4.33334 1.58472 4.28521 1.49215 4.19873C1.39958 4.11224 1.34329 3.99384 1.33466 3.86745C1.32603 3.74107 1.36569 3.61611 1.44563 3.51784C1.52558 3.41957 1.63984 3.35531 1.76534 3.33804L1.83334 3.33337H14.1667H1.83334Z"
+                                    fill="#84888F"
+                                  />
+                                </svg>
+                              </td>
+                              <td>Activity</td>
+                              <td>Menyesuaikan rancangan keuangan</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>21/9/2022</td>
+                  <td>07:00pm</td>
+                  <td>10:35pm</td>
+                  <td>3 hours 35m</td>
+                  <td>
+                    <a href="" class="table-arrow-2">
+                      <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.54041 11L8.64025 6L1.54041 1" stroke="#262727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>22/9/2022</td>
+                  <td>07:00pm</td>
+                  <td>10:35pm</td>
+                  <td>3 hours 35m</td>
+                  <td>
+                    <a href="" class="table-arrow-3">
+                      <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.54041 11L8.64025 6L1.54041 1" stroke="#262727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>23/9/2022</td>
+                  <td>07:00pm</td>
+                  <td>09:00pm</td>
+                  <td>2 hours</td>
+                  <td>
+                    <a href="" class="table-arrow-4">
+                      <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.54041 11L8.64025 6L1.54041 1" stroke="#262727" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+                <!-- and so on... -->
+              </tbody>
+            </table>
+          </right>
+        </div>
+      </main>
+      <footer class="footer">
+        <div class="footer_copyright">&copy;2022</div>
+        <div class="footer_byline">Made with &hearts;</div>
+      </footer>
+    </div>
+    <script type="text/javascript">
+      const menuIcon = document.querySelector(".menu-icon");
+      const aside = document.querySelector(".aside");
+      const asideClose = document.querySelector(".aside_close-icon");
+
+      function toggle(el, className) {
+        if (el.classList.contains(className)) {
+          el.classList.remove(className);
+        } else {
+          el.classList.add(className);
+        }
+      }
+
+      menuIcon.addEventListener("click", function () {
+        toggle(aside, "active");
+      });
+
+      asideClose.addEventListener("click", function () {
+        toggle(aside, "active");
+      });
+
+      const table = document.getElementsByClassName("styled-table");
+      const tbody = table.getElementsByTagName("tbody");
+      const tr = tbody.getElementsByTagName("td");
+      const td = tr.getElementsByTagName("td");
+      const a = a.getElementsByTagName("a");
+
+      a.addEventListener("click", function () {
+        toggle(aside, "active");
+      });
+
+      function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+      }
+
+      window.onclick = function (event) {
+        if (!event.target.matches(".panah-bawah")) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains("show")) {
+              openDropdown.classList.remove("show");
+            }
+          }
+        }
+      };
+
+    </script>
+  </body>
+</html>
