@@ -422,6 +422,51 @@ button {
   border-radius: 4px;
 }
 
+.paid {
+  box-sizing: border-box;
+  width: 64px;
+  height: 18px;
+
+  background: rgba(108, 162, 139, 0.15);
+  border: 1px solid #6ca28b;
+  border-radius: 4px;
+
+  color: #2e7255;
+
+  text-justify: center;
+  text-align: center;
+}
+
+.paid {
+  box-sizing: border-box;
+  width: 64px;
+  height: 18px;
+
+  background: rgba(108, 162, 139, 0.15);
+  border: 1px solid #6ca28b;
+  border-radius: 4px;
+
+  color: #2e7255;
+
+  text-justify: center;
+  text-align: center;
+}
+
+.unpaid {
+  box-sizing: border-box;
+  width: 64px;
+  height: 18px;
+
+  background: rgba(151, 162, 108, 0.15);
+  border: 1px solid #97a26c;
+  border-radius: 4px;
+
+  color: #798354;
+
+  text-justify: center;
+  text-align: center;
+}
+
 /* responsive layout */
 @media only screen and (min-width: 750px) {
   .grid-container {
