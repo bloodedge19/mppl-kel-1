@@ -1,11 +1,14 @@
+
 # MPPL KELOMPOK 1
 
-- Aldinur Syahdin Halim Simbolon G64190003
-- Alvina Maharani Hasibuan G64190004
-- Annisa Dwi Quintho G64190006
-- Daffa Muhammad Subhan G64190013
-- Siti Magfiroh G64190042
-- Muhammad Alfarizhi G64190087
+| Nama | NIM     | Role                |
+| :-------- | :------- | :------------------------- |
+| `Aldinur Syahdin Halim Simbolon` | `G64190003` | `Frontend` |
+| `Alvina Maharani Hasibuan` | `G64190004` | `Backend` |
+| `Annisa Dwi Quintho` | `G64190006` | `UI/UX` |
+| `Daffa Muhammad Subhan` | `G64190013` | `Project Manager` |
+| `Siti Magfiroh` | `G64190042` | `QA` |
+| `Muhammad Alfarizhi` | `G64190087` | `Frontend` |
 
 # Background
 **Gaji** adalah suatu bentuk jasa yang diberikan secara teratur 
@@ -41,3 +44,17 @@ Sedangkan karyawan dapat menggunakan aplikasi ini untuk mengisi
 presensi, jumlah jam lembur, perizinan, dan jumlah reimbursement. 
 Adapun fitur-fitur yang ada dalam aplikasi iMployee ini antara lain 
 pengisian, presensi, reimbursement karyawan, perizinan, dan overtime
+
+# Our Features 
+### (for Employee)
+- Presensi kehadiran
+- *Reimbursement*
+- Perizinan
+- *Overtime*
+- Menunjukkan gaji
+
+### (for HR)
+- Menambah *employee*
+- Menerima atau menolak *request employee* 
+- Mengirimkan gaji *employee*
+
