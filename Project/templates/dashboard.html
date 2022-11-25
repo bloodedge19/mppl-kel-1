@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Building dashboard with gird and flex</title>
-    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
   </head>
   <body>
     <div class="grid-container">
@@ -15,7 +15,7 @@
         <div class="container-search-box">
           <form action="" method="get" class="search-box">
             <input type="text" placeholder="search anything" name="q" />
-            <button type="submit"><img src="img3/search.svg" alt="search" /></button>
+            <button type="submit"><img src="{{ url_for('static', filename='images/search.svg') }}" alt="search" /></button>
           </form>
         </div>
 
@@ -28,10 +28,10 @@
         ></a>
 
         <div class="profil">
-          <a href="#" class="profil-picture"> <img src="img3/profil .svg" alt="profil-picture" /> </a>
+          <a href="#" class="profil-picture"> <img src="{{ url_for('static', filename='images/profile.svg') }}" alt="profil-picture" /> </a>
           <div class="profil-name">Daffa Muhammad Subhan</div>
           <div class="profil-nim">1300078</div>
-          <a href="#" class="panah-bawah"><img src="img3/panah-bawah.svg" alt="panah-bawah" /></a>
+          <a href="#" class="panah-bawah"><img src="{{ url_for('static', filename='images/panah-bawah.svg') }}" alt="panah-bawah" /></a>
         </div>
       </header>
       <aside class="aside">
