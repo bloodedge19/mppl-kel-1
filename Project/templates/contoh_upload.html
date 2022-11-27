@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <title>File Upload</title>
+  </head>
+  <body>
+    <h1>File Upload</h1>
+    <form method="POST" action="/reimbursement" enctype="multipart/form-data">
+      <p><label class="condition" for="condition">Reimbursement Type :</label>
+            <select id="condition" name="condition">
+              <option value="Mobile Bills">Mobile Bills</option>
+              <option value="Transportation">Transportation</option>
+              <option value="Medical">Medical</option>
+              <option value="Healthy">Accomodation</option>                 
+            </select></p>
+      <p><label class="amount" for="amount">Amount</label></p>
+              <input type="text" id="amount" name="amount">
+
+              <label for="activity" class="activity">Description</label>
+              <input type="text" id="description" name="description">
+      <p><input type="file" name="file"></p>
+      <p><input type="submit" value="Submit"></p>
+    </form>
+  </body>
+</html>

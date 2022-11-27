@@ -83,3 +83,24 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-11-25 19:27:02
+DROP TABLE IF EXISTS `reimbursement`;
+CREATE TABLE `reimbursement` (
+  `reimbursement_id` int NOT NULL AUTO_INCREMENT,
+  `employee_id` int DEFAULT NULL,
+  `date` datetime NOT NULL,
+  `type` char(50) NOT NULL,
+  `amount` int NOT NULL,
+  `description` TEXT NOT NULL,
+  `status` BOOLEAN NULL,
+  PRIMARY KEY (`reimbursement_id`),
+  FOREIGN KEY (`employee_id`) REFERENCES employees(employee_id)
+);
+
+DROP TABLE IF EXISTS `reimbursement`;
+CREATE TABLE `payroll` (
+	`payroll_id` int NOT NULL AUTO_INCREMENT,
+	`employee_id` int DEFAULT NULL,
+	`status` BOOLEAN NULL,
+	PRIMARY KEY (`payroll_id`),
+	FOREIGN KEY (`employee_id`) REFERENCES employees(employee_id)
+);

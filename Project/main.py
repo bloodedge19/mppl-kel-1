@@ -2,6 +2,7 @@ from config import *
 from db import *
 from controller import *
 from routes import *
+from hr import *
 from flask_cors import CORS
 
 CORS(app)
