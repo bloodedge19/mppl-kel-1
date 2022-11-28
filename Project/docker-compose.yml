@@ -10,7 +10,7 @@ services:
       - "3306:3306"
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=Greyabu@201
+      - MYSQL_ROOT_PASSWORD=REDACTED
       - MYSQL_DATABASE=imployee
   imployee:
     container_name: imployee

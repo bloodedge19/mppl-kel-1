@@ -28,6 +28,7 @@ CREATE TABLE `employees` (
   `password` char(60) DEFAULT NULL,
   `fullname` char(50) NOT NULL,
   `salary` int NOT NULL,
+  `overtime_salary` int DEFAULT NULL,
   `isHR` tinyint(1) NOT NULL,
   PRIMARY KEY (`employee_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
@@ -39,7 +40,7 @@ CREATE TABLE `employees` (
 
 LOCK TABLES `employees` WRITE;
 /*!40000 ALTER TABLE `employees` DISABLE KEYS */;
-INSERT INTO `employees` VALUES (1,'admin@imployee.id','$2b$12$HJie5kftgDhSgIbuYklckeG1YvZuCppb1Jjcu2nPcSaRuPqW3aeLq','Alvina Maharni',12000000,1),(3,'asd@gmail.com','$2b$12$eEH/5m1cav..1Rlin9rDeO0LMCciqLB5tND73SzuX4sVZC2FjjEBS','asd',123,0),(4,'testing@gmail.com','$2b$12$rB5nHIT2K98lgtNPNf/qGOPFyKqIuDZ.BE5KhWRqc13un6Iq5125C','testing',1000,0);
+INSERT INTO `employees` VALUES (1,'admin@imployee.id','$2b$12$rB5nHIT2K98lgtNPNf/qGOPFyKqIuDZ.BE5KhWRqc13un6Iq5125C','Alvina Maharni',12000000,120000,1),(3,'asd@gmail.com','$2b$12$eEH/5m1cav..1Rlin9rDeO0LMCciqLB5tND73SzuX4sVZC2FjjEBS','asd',123,NULL,0),(4,'testing@gmail.com','$2b$12$rB5nHIT2K98lgtNPNf/qGOPFyKqIuDZ.BE5KhWRqc13un6Iq5125C','testing',12000000,120000,0);
 /*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,11 +57,11 @@ CREATE TABLE `log_employees` (
   `clock_in` datetime DEFAULT NULL,
   `clock_out` datetime DEFAULT NULL,
   `permit` datetime DEFAULT NULL,
-  `overtime` datetime DEFAULT NULL,
+  `working_hours` time DEFAULT NULL,
   PRIMARY KEY (`log_id`),
   KEY `employee_id` (`employee_id`),
   CONSTRAINT `log_employees_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,8 +70,35 @@ CREATE TABLE `log_employees` (
 
 LOCK TABLES `log_employees` WRITE;
 /*!40000 ALTER TABLE `log_employees` DISABLE KEYS */;
-INSERT INTO `log_employees` VALUES (3,4,'2022-11-25 17:34:27','2022-11-25 18:20:55',NULL,NULL),(7,4,'2022-11-26 10:10:10',NULL,NULL,NULL);
+INSERT INTO `log_employees` VALUES (3,4,'2022-11-25 17:34:27','2022-11-25 19:34:27',NULL,'02:00:00'),(8,1,'2022-11-27 22:09:10','2022-11-27 23:08:37',NULL,'00:59:27'),(9,4,'2022-11-27 23:10:59','2022-11-27 23:19:51',NULL,'00:08:52');
 /*!40000 ALTER TABLE `log_employees` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `payroll`
+--
+
+DROP TABLE IF EXISTS `payroll`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `payroll` (
+  `payroll_id` int NOT NULL AUTO_INCREMENT,
+  `employee_id` int DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`payroll_id`),
+  KEY `employee_id` (`employee_id`),
+  CONSTRAINT `payroll_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `payroll`
+--
+
+LOCK TABLES `payroll` WRITE;
+/*!40000 ALTER TABLE `payroll` DISABLE KEYS */;
+INSERT INTO `payroll` VALUES (1,4,0);
+/*!40000 ALTER TABLE `payroll` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -82,25 +110,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-25 19:27:02
-DROP TABLE IF EXISTS `reimbursement`;
-CREATE TABLE `reimbursement` (
-  `reimbursement_id` int NOT NULL AUTO_INCREMENT,
-  `employee_id` int DEFAULT NULL,
-  `date` datetime NOT NULL,
-  `type` char(50) NOT NULL,
-  `amount` int NOT NULL,
-  `description` TEXT NOT NULL,
-  `status` BOOLEAN NULL,
-  PRIMARY KEY (`reimbursement_id`),
-  FOREIGN KEY (`employee_id`) REFERENCES employees(employee_id)
-);
-
-DROP TABLE IF EXISTS `reimbursement`;
-CREATE TABLE `payroll` (
-	`payroll_id` int NOT NULL AUTO_INCREMENT,
-	`employee_id` int DEFAULT NULL,
-	`status` BOOLEAN NULL,
-	PRIMARY KEY (`payroll_id`),
-	FOREIGN KEY (`employee_id`) REFERENCES employees(employee_id)
-);
+-- Dump completed on 2022-11-28 10:02:40
