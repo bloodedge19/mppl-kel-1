@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  <>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Attendance</title>
@@ -174,7 +173,7 @@
             <script src="{{ url_for('static', filename='js/attendance-get.js') }}"></script>
             <script src="{{ url_for('static', filename='js/attendance-post.js') }}"></script>
 
-            <form >
+            <form action="/clock-in">
             <label class="condition" for="condition">Condition :</label>
             <select id="condition" name="condition">
               <option value="Healthy">Healthy</option>
@@ -182,8 +181,7 @@
             </select>
 
            
-              <label class="appt" for="appt">Start time:</label>
-              <input type="time" id="appt" name="appt">
+
 
               <label for="" class="activity">Activity</label>
               <input type="text" id="activity">
