@@ -626,6 +626,7 @@ left {
   /* Inside auto layout */
   margin-top: 45px;
   margin-left: 20px;
+
   flex: none;
   order: 0;
   flex-grow: 0;
@@ -648,6 +649,7 @@ left {
   justify-items: center;
   margin-left: 20px;
   background: #ffffff;
+  margin-bottom: 45px;
 }
 
 .appt {
