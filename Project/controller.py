@@ -39,8 +39,11 @@ def clock_checker(emp_id, choice):
 @app.route('/login', methods =['GET', 'POST'])
 def do_login():
 	try:
+		print('masuk sini woyy')
 		mysql = db.connect()
 		msg = ''
+		print('bisa gak ini woi')
+		print(request)
 		if request.method == 'POST':
 			print(request.form, flush=True)
 			email = request.form['email']
@@ -49,6 +52,9 @@ def do_login():
 			cursor.execute('SELECT * FROM employees where email = %s', (email, ))
 			rv = cursor.fetchone()
 			print(rv, flush=True)
+			print('masuk gak ini')
+			print(rv)
+			print(bcrypt.check_password_hash(rv['password'], password))
 			if bcrypt.check_password_hash(rv['password'], password):
 				session['loggedin'] = True
 				session['id'] = rv['employee_id']
@@ -65,6 +71,7 @@ def do_login():
 				return redirect(url_for('login'))
 		else:
 			try:
+				print(session['loggedin'])
 				if(session['loggedin'] == True):
 					return redirect(url_for('dashboard'))
 				else:
@@ -72,6 +79,7 @@ def do_login():
 			except:
 				return render_template('login.html')
 	except:
+		print('apakah ini error')
 		return redirect(url_for('login'))
 
 @app.route('/register', methods =['GET', 'POST'])
@@ -180,38 +188,47 @@ def attendance():
 		print(e)
 		return redirect(url_for('login'))
 
-@app.route('/overtime')
+@app.route('/overtime', methods =['GET', 'POST'])
 def overtime():
 	try:
-		if session['loggedin'] != None:
-			mysql = db.connect()
-			cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
-			now = datetime.datetime.now(pytz.timezone('Asia/Jakarta'))
-			start = now.strftime("%Y-%m-%d 00:00:00")
-			end = now.strftime("%Y-%m-%d 23:59:59")
-			cursor.execute("SELECT log_id, clock_in, clock_out, working_hours from log_employees where employee_id = %s", (session['id'], ))
-			row_headers=[x[0] for x in cursor.description]
-			rv = cursor.fetchall()
-			print(rv, flush=True)
-			json_data = []
-			for i in range(len(rv)):
-				data = {}
-				data['date'] = (rv[i]['clock_in']).strftime('%m/%d/%Y')
-				data['start'] = (rv[i]['clock_in']).strftime('%H:%M')
-				if(rv[i]['clock_out'] == None):
-					data['end'] = "--:--"
-				else:
-					data['end'] = (rv[i]['clock_out']).strftime('%H:%M')
-				data['working_hours'] = rv[i]['working_hours']
-				json_data.append(data)
-			cursor.close()
-			mysql.close()
-			return json.dumps(json_data, default=str)
+		if (request.method == 'GET'): 
+			if session['loggedin'] != None:
+				return render_template('overtime.html')
+			else:
+				return redirect(url_for('login'))		
+			
 		else:
 			return redirect(url_for('dashboard'))
 	except Exception as e:
 		print(e)
 		return redirect(url_for('dashboard'))
+
+@app.route('/api-overtime')
+def overtime_api():
+	if session['loggedin'] != None:
+				mysql = db.connect()
+				cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
+				now = datetime.datetime.now(pytz.timezone('Asia/Jakarta'))
+				start = now.strftime("%Y-%m-%d 00:00:00")
+				end = now.strftime("%Y-%m-%d 23:59:59")
+				cursor.execute("SELECT log_id, clock_in, clock_out, working_hours from log_employees where employee_id = %s", (session['id'], ))
+				row_headers=[x[0] for x in cursor.description]
+				rv = cursor.fetchall()
+				print(rv, flush=True)
+				json_data = []
+				for i in range(len(rv)):
+					data = {}
+					data['date'] = (rv[i]['clock_in']).strftime('%m/%d/%Y')
+					data['start'] = (rv[i]['clock_in']).strftime('%H:%M')
+					if(rv[i]['clock_out'] == None):
+						data['end'] = "--:--"
+					else:
+						data['end'] = (rv[i]['clock_out']).strftime('%H:%M')
+					data['working_hours'] = rv[i]['working_hours']
+					json_data.append(data)
+				cursor.close()
+				mysql.close()
+				return json.dumps(json_data, default=str)
 
 @app.route("/reimbursement", methods =['GET', 'POST'])
 def reimbursement():
