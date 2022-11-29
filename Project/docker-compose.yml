@@ -16,7 +16,7 @@ services:
     container_name: imployee
     build: .
     ports:
-      - "80:5000"
+      - "8000:5000"
     volumes:
       - ./:/app
     environment:
