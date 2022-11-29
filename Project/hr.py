@@ -43,8 +43,6 @@ def calculate(emp_id):
 
 
 
-
-
 @app.route("/payroll")
 def payroll():
 	try:
