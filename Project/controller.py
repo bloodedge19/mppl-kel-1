@@ -62,6 +62,7 @@ def do_login():
 				cursor.close()
 				mysql.close()
 				msg = 'Incorrect email / password !'
+				return redirect(url_for('login'))
 		else:
 			try:
 				if(session['loggedin'] == True):
