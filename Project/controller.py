@@ -38,38 +38,40 @@ def clock_checker(emp_id, choice):
 
 @app.route('/login', methods =['GET', 'POST'])
 def do_login():
-	mysql = db.connect()
-	msg = ''
-	if request.method == 'POST':
-		print(request.form, flush=True)
-		email = request.form['email']
-		password = request.form['password']
-		cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
-		cursor.execute('SELECT * FROM employees where email = %s', (email, ))
-		rv = cursor.fetchone()
-		print(rv, flush=True)
-		if bcrypt.check_password_hash(rv['password'], password):
-			session['loggedin'] = True
-			session['id'] = rv['employee_id']
-			session['fullname'] = rv['fullname']
-			session['HR'] = rv['isHR']
-			msg = 'Logged in successfully !'
-			cursor.close()
-			mysql.close()
-			return redirect(url_for('dashboard'))
-		else:
-			cursor.close()
-			mysql.close()
-			msg = 'Incorrect email / password !'
-	else:
-		try:
-			if(session['loggedin'] == True):
+	try:
+		mysql = db.connect()
+		msg = ''
+		if request.method == 'POST':
+			print(request.form, flush=True)
+			email = request.form['email']
+			password = request.form['password']
+			cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
+			cursor.execute('SELECT * FROM employees where email = %s', (email, ))
+			rv = cursor.fetchone()
+			print(rv, flush=True)
+			if bcrypt.check_password_hash(rv['password'], password):
+				session['loggedin'] = True
+				session['id'] = rv['employee_id']
+				session['fullname'] = rv['fullname']
+				session['HR'] = rv['isHR']
+				msg = 'Logged in successfully !'
+				cursor.close()
+				mysql.close()
 				return redirect(url_for('dashboard'))
 			else:
-				return render_template('login_html')
-		except:
-			return render_template('login.html')
-	return render_template('login.html', msg = msg)
+				cursor.close()
+				mysql.close()
+				msg = 'Incorrect email / password !'
+		else:
+			try:
+				if(session['loggedin'] == True):
+					return redirect(url_for('dashboard'))
+				else:
+					return render_template('login_html')
+			except:
+				return render_template('login.html')
+	except:
+		return redirect(url_for('login'))
 
 @app.route('/register', methods =['GET', 'POST'])
 def register():
@@ -117,7 +119,7 @@ def clock_in():
 			return time
 	except Exception as e: 
 		print(e, flush=True)
-		return redirect(url_for('dashboard'))
+		return redirect(url_for('attendance'))
 
 @app.route("/clock-out")
 def clock_out():
@@ -142,7 +144,7 @@ def clock_out():
 			return time
 	except Exception as e: 
 		print(e, flush=True)
-		return redirect(url_for('login'))
+		return redirect(url_for('attendance'))
 
 @app.route('/logout')
 def logout():
@@ -216,6 +218,39 @@ def reimbursement():
 		if (request.method == 'GET'): 
 			if session['loggedin'] != None:
 				return render_template('contoh_upload.html')
+			else:
+				return redirect(url_for('login'))
+		elif (request.method == 'POST'):
+			print(request.form, flush=True)
+			uploaded_file = request.files['file']
+			filename = secure_filename(uploaded_file.filename)
+			if filename != '':
+				mysql = db.connect()
+				cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
+				file_ext = os.path.splitext(filename)[1]
+				if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+					return "Wrong Format"
+				now = datetime.datetime.now(pytz.timezone('Asia/Jakarta'))
+				date = now.strftime("%Y-%m-%d")
+				types = request.form['condition']
+				amount = int(request.form['amount'])
+				description = request.form['description']
+				cursor.execute('INSERT INTO reimbursement VALUES (NULL, %s, %s, %s, %s, %s, NULL)', (session['id'], date, types, amount, description))
+				mysql.commit()
+				cursor.close()
+				mysql.close()
+				uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
+			return "Success"
+	except Exception as e:
+		print(e)
+		return redirect(url_for('login'))
+
+@app.route("/permit", methods =['GET', 'POST'])
+def permit():
+	try:
+		if (request.method == 'GET'): 
+			if session['loggedin'] != None:
+				return render_template('permit.html')
 			else:
 				return redirect(url_for('login'))
 		elif (request.method == 'POST'):
