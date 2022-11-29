@@ -12,6 +12,9 @@
     <div id="signin">
       <div class="login">
         <h2 class="title">Login</h2>
+        {% for message in get_flashed_messages() %}
+        <h2 class="title">{{ message }}</h2>
+        {% endfor %}
       </div>
       <form action="/login" method="post">
         <div>

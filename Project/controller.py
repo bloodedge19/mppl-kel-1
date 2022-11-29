@@ -1,6 +1,6 @@
 from config import *
 from hr import *
-from flask import render_template, request, redirect, url_for, session, abort
+from flask import render_template, request, redirect, url_for, session, abort, flash
 from flask_login import login_required
 from werkzeug.datastructures import ImmutableMultiDict
 from werkzeug.utils import secure_filename
@@ -38,6 +38,7 @@ def clock_checker(emp_id, choice):
 
 @app.route('/login', methods =['GET', 'POST'])
 def do_login():
+	err = "Incorrect email or password"
 	try:
 		mysql = db.connect()
 		msg = ''
@@ -48,20 +49,25 @@ def do_login():
 			cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
 			cursor.execute('SELECT * FROM employees where email = %s', (email, ))
 			rv = cursor.fetchone()
-			print(rv, flush=True)
-			if bcrypt.check_password_hash(rv['password'], password):
-				session['loggedin'] = True
-				session['id'] = rv['employee_id']
-				session['fullname'] = rv['fullname']
-				session['HR'] = rv['isHR']
-				msg = 'Logged in successfully !'
-				cursor.close()
-				mysql.close()
-				return redirect(url_for('dashboard'))
+			if(rv is not None):
+				if bcrypt.check_password_hash(rv['password'], password):
+					session['loggedin'] = True
+					session['id'] = rv['employee_id']
+					session['fullname'] = rv['fullname']
+					session['HR'] = rv['isHR']
+					msg = 'Logged in successfully !'
+					cursor.close()
+					mysql.close()
+					return redirect(url_for('dashboard'))
+				else:
+					cursor.close()
+					mysql.close()
+					flash(err)
+					return redirect(url_for('login'))
 			else:
 				cursor.close()
 				mysql.close()
-				msg = 'Incorrect email / password !'
+				flash(err)
 				return redirect(url_for('login'))
 		else:
 			try:
@@ -71,7 +77,9 @@ def do_login():
 					return render_template('login_html')
 			except:
 				return render_template('login.html')
-	except:
+	except Exception as e:
+		print(e, flush=True)
+		flash(err)
 		return redirect(url_for('login'))
 
 @app.route('/register', methods =['GET', 'POST'])
@@ -104,10 +112,14 @@ def register():
 
 @app.route("/clock-in")
 def clock_in():
+	err = "You're already clock-in!"
+	msg = "Success clock-in!"
 	try:
 		if(session['loggedin'] != None):
 			if(clock_checker(session['id'], 'clock-in') == False):
-				return "You are already clock-in"
+				flash(err)
+				print(err, flush=True)
+				return redirect(url_for('attendance'))
 			mysql = db.connect()
 			print("Sesssion: ", session['id'], flush=True)
 			now = datetime.datetime.now(pytz.timezone('Asia/Jakarta'))
@@ -117,18 +129,23 @@ def clock_in():
 			mysql.commit()
 			cursor.close()
 			mysql.close()
-			return time
+			flash(msg)
+			return redirect(url_for('attendance'))
 	except Exception as e: 
 		print(e, flush=True)
 		return redirect(url_for('attendance'))
 
 @app.route("/clock-out")
 def clock_out():
+	err = "You're already clock-out!"
+	msg = "Success clock-out!"
 	try:
 		if(session['loggedin'] != None):
 			check = clock_checker(session['id'], 'clock-out')
 			if(check == False):
-				return "You are already clock-out"
+				flash(err)
+				print(err, flush=True)
+				return redirect(url_for('attendance'))
 			mysql = db.connect()
 			now = datetime.datetime.now(pytz.timezone('Asia/Jakarta'))
 			time = now.strftime("%Y-%m-%d %H:%M:%S")
@@ -142,7 +159,8 @@ def clock_out():
 			calculate(session['id'])
 			cursor.close()
 			mysql.close()
-			return time
+			flash(msg)
+			return redirect(url_for('attendance'))
 	except Exception as e: 
 		print(e, flush=True)
 		return redirect(url_for('attendance'))
