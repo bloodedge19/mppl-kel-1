@@ -77,6 +77,7 @@ def do_login():
 				return render_template('login.html')
 	except Exception as e:
 		print(e, flush=True)
+		flash(err)
 		return redirect(url_for('login'))
 
 @app.route('/register', methods =['GET', 'POST'])
