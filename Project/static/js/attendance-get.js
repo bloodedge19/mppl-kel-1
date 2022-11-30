@@ -1,19 +1,22 @@
 // section fetch
 // api url
 const api_url =
-	"http://192.168.73.208:5000/api-overtime";
+	"/api-overtime";
 
 // Defining async function
 async function getapi(url) {
 	
 	// Storing response
-	const response = await fetch(url);
-	
+	const response = await fetch(url, {	
+		method: 'GET',
+		credentials: 'include'
+	});
 	// Storing data in form of JSON
 	var data = await response.json();
 	console.log(data);
-  console.log(data.list)
+	console.log(data.list)
 	show(data);
+	
 }
 // Calling that async function
 getapi(api_url);

@@ -40,13 +40,9 @@ def clock_checker(emp_id, choice):
 def do_login():
 	err = "Incorrect email or password"
 	try:
-		print('masuk sini woyy')
 		mysql = db.connect()
 		msg = ''
-		print('bisa gak ini woi')
-		print(request)
 		if request.method == 'POST':
-			print(request.form, flush=True)
 			email = request.form['email']
 			password = request.form['password']
 			cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
@@ -54,8 +50,6 @@ def do_login():
 			rv = cursor.fetchone()
 
 			print(rv, flush=True)
-			print('masuk gak ini')
-			print(rv)
 			print(bcrypt.check_password_hash(rv['password'], password))
 			if bcrypt.check_password_hash(rv['password'], password):
 				session['loggedin'] = True
@@ -81,8 +75,8 @@ def do_login():
 					return render_template('login_html')
 			except:
 				return render_template('login.html')
-	except:
-		print('apakah ini error')
+	except Exception as e:
+		print(e, flush=True)
 		return redirect(url_for('login'))
 
 @app.route('/register', methods =['GET', 'POST'])
@@ -179,6 +173,7 @@ def logout():
 @app.route("/dashboard")
 def dashboard():
 	try:
+		print(session, flush=True)
 		if session['loggedin'] != None:
 			if session['HR'] == 1:
 				return render_template('hr_dashboard.html')
@@ -218,37 +213,38 @@ def overtime():
 
 @app.route('/api-overtime')
 def overtime_api():
-	if session['loggedin'] != None:
-				mysql = db.connect()
-				cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
-				now = datetime.datetime.now(pytz.timezone('Asia/Jakarta'))
-				start = now.strftime("%Y-%m-%d 00:00:00")
-				end = now.strftime("%Y-%m-%d 23:59:59")
-				cursor.execute("SELECT log_id, clock_in, clock_out, working_hours from log_employees where employee_id = %s", (session['id'], ))
-				row_headers=[x[0] for x in cursor.description]
-				rv = cursor.fetchall()
-				print(rv, flush=True)
-				json_data = []
-				for i in range(len(rv)):
-					data = {}
-					data['date'] = (rv[i]['clock_in']).strftime('%m/%d/%Y')
-					data['start'] = (rv[i]['clock_in']).strftime('%H:%M')
-					if(rv[i]['clock_out'] == None):
-						data['end'] = "--:--"
-					else:
-						data['end'] = (rv[i]['clock_out']).strftime('%H:%M')
-					data['working_hours'] = rv[i]['working_hours']
-					json_data.append(data)
-				cursor.close()
-				mysql.close()
-				return json.dumps(json_data, default=str)
+	print(session, flush=True)
+	if (True):
+		mysql = db.connect()
+		cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
+		now = datetime.datetime.now(pytz.timezone('Asia/Jakarta'))
+		start = now.strftime("%Y-%m-%d 00:00:00")
+		end = now.strftime("%Y-%m-%d 23:59:59")
+		cursor.execute("SELECT log_id, clock_in, clock_out, working_hours from log_employees where employee_id = %s", (session['id'], ))
+		row_headers=[x[0] for x in cursor.description]
+		rv = cursor.fetchall()
+		print(rv, flush=True)
+		json_data = []
+		for i in range(len(rv)):
+			data = {}
+			data['date'] = (rv[i]['clock_in']).strftime('%m/%d/%Y')
+			data['start'] = (rv[i]['clock_in']).strftime('%H:%M')
+			if(rv[i]['clock_out'] == None):
+				data['end'] = "--:--"
+			else:
+				data['end'] = (rv[i]['clock_out']).strftime('%H:%M')
+				data['working_hours'] = rv[i]['working_hours']
+			json_data.append(data)
+		cursor.close()
+		mysql.close()
+		return json.dumps(json_data, default=str)
 
 @app.route("/reimbursement", methods =['GET', 'POST'])
 def reimbursement():
 	try:
 		if (request.method == 'GET'): 
 			if session['loggedin'] != None:
-				return render_template('contoh_upload.html')
+				return render_template('reimbursement.html')
 			else:
 				return redirect(url_for('login'))
 		elif (request.method == 'POST'):
