@@ -80,33 +80,7 @@ def do_login():
 		flash(err)
 		return redirect(url_for('login'))
 
-@app.route('/register', methods =['GET', 'POST'])
-def register():
-	msg = ''
-	mysql = db.connect()
-	if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
-		data = request.form.to_dict()
-		password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
-		cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
-		cursor.execute('SELECT * FROM employees WHERE email = %s', (data['email'], ))
-		account = cursor.fetchone()
-		if account:
-			msg = 'Account already exists !'
-		elif not re.match(r'[^@]+@[^@]+\.[^@]+', data['email']):
-			msg = 'Invalid email address !'
-		elif not data['password'] or not data['email']:
-			msg = 'Please fill out the form !'
-		else:
-			cursor.execute('INSERT INTO employees VALUES (NULL, %s, %s, %s, %s, 0)', (data['email'], password, data['fullname'], data['salary'], ))
-			mysql.commit()
-			msg = 'You have successfully registered !'
-			cursor.close()
-			mysql.close()
-	elif request.method == 'POST':
-		msg = 'Please fill out the form !'
-		cursor.close()
-		mysql.close()
-	return render_template('register.html', msg = msg)
+
 
 @app.route("/clock-in")
 def clock_in():

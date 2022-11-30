@@ -49,7 +49,7 @@ def payroll():
 		if(session['HR'] == 1):
 			return render_template("hr_payroll.html")
 		else:
-			return "Not HR"
+			return redirect(url_for('dashboard'))
 	except:
 		return redirect(url_for('dashboard'))
 
@@ -79,6 +79,40 @@ def get_payroll():
 			mysql.close()
 			return json.dumps(json_data, default=str)
 		else:
-			return "Not HR"
+			return redirect(url_for('dashboard'))
 	except:
+		return redirect(url_for('dashboard'))
+
+@app.route('/register', methods =['GET', 'POST'])
+def register():
+	try:
+		if request.method == 'POST':
+			if(session['HR'] != 1):
+				return redirect(url_for('dashboard'))
+			else:
+				msg = ''
+				mysql = db.connect()
+				data = request.form.to_dict()
+				print(data)
+				password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
+				cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
+				cursor.execute('SELECT * FROM employees WHERE email = %s or employee_id = %s', (data['email'], data['employee_id'], ))
+				account = cursor.fetchone()
+				if account:
+					msg = 'Account already exists !'
+				elif not re.match(r'[^@]+@[^@]+\.[^@]+', data['email']):
+					msg = 'Invalid email address !'
+				elif not data['password'] or not data['email']:
+					msg = 'Please fill out the form !'
+				else:
+					cursor.execute('INSERT INTO employees VALUES (%s, %s, %s, %s, %s, %s, %s, NULL, 0)', (data['employee_id'], data['email'], data['address'], data['phone_number'], password, data['fullname'], data['salary'], ))
+					mysql.commit()
+					msg = 'You have successfully registered !'
+					cursor.close()
+					mysql.close()
+				return render_template("hr_add_employee.html", msg = msg)
+		elif request.method == 'GET':
+			return render_template('hr_add_employee.html')
+	except Exception as e:
+		print(e)
 		return redirect(url_for('dashboard'))
