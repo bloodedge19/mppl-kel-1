@@ -165,10 +165,7 @@ def clock_out():
 
 @app.route('/logout')
 def logout():
-	session.pop('loggedin', None)
-	session.pop('id', None)
-	session.pop('fullname', None)
-	session.pop('HR', None)
+	session.clear()
 	return redirect(url_for('login'))
 
 @app.route("/dashboard")
@@ -215,7 +212,7 @@ def overtime():
 @app.route('/api-overtime')
 def overtime_api():
 	print(session, flush=True)
-	if (True):
+	if (session['loggedin'] != None):
 		mysql = db.connect()
 		cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
 		now = datetime.datetime.now(pytz.timezone('Asia/Jakarta'))
@@ -239,6 +236,19 @@ def overtime_api():
 		cursor.close()
 		mysql.close()
 		return json.dumps(json_data, default=str)
+
+@app.route("/api-users")
+def users_api():
+	mysql = db.connect()
+	cur = mysql.cursor()
+	cur.execute("SELECT email, address, phone_number, fullname, salary, overtime_salary from employees where employee_id = %s", (session['id'], ))
+	row_headers=[x[0] for x in cur.description] #this will extract row headers
+	rv = cur.fetchall()
+	json_data=[]
+	for result in rv:
+		json_data.append(dict(zip(row_headers,result)))
+	return json.dumps(json_data[0])
+	#return "Test"
 
 @app.route("/reimbursement", methods =['GET', 'POST'])
 def reimbursement():
