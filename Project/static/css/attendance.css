@@ -743,7 +743,6 @@ input[type="submit"] {
   width: 320px;
   height: 56px;
 
-  background: #4274b8;
   border-radius: 10px;
 
   font-family: "Poppins";
@@ -759,6 +758,22 @@ input[type="submit"] {
 
   margin-bottom: 45px;
 }
+
+.clock-in input {
+  background: #4274b8;
+}
+
+#clock-in {
+  display: flex;
+}
+
+#clock-out {
+  display: none;
+}
+.clock-out input {
+  background: #ff0000;
+}
+
 /* responsive layout */
 @media only screen and (min-width: 750px) {
   .grid-container {
