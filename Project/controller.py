@@ -89,7 +89,6 @@ def clock_in():
 	try:
 		if(session['loggedin'] != None):
 			if(clock_checker(session['id'], 'clock-in') == False):
-				flash(err)
 				print(err, flush=True)
 				return redirect(url_for('attendance'))
 			mysql = db.connect()
@@ -101,7 +100,6 @@ def clock_in():
 			mysql.commit()
 			cursor.close()
 			mysql.close()
-			flash(msg)
 			return redirect(url_for('attendance'))
 	except Exception as e: 
 		print(e, flush=True)
@@ -115,7 +113,6 @@ def clock_out():
 		if(session['loggedin'] != None):
 			check = clock_checker(session['id'], 'clock-out')
 			if(check == False):
-				flash(err)
 				print(err, flush=True)
 				return redirect(url_for('attendance'))
 			mysql = db.connect()
@@ -131,7 +128,6 @@ def clock_out():
 			calculate(session['id'])
 			cursor.close()
 			mysql.close()
-			flash(msg)
 			return redirect(url_for('attendance'))
 	except Exception as e: 
 		print(e, flush=True)
@@ -270,6 +266,8 @@ def data_reimbursement():
 		json_data.append(dict(zip(row_headers,result)))
 	return json.dumps(json_data, default=str)
 
+
+
 @app.route("/permit", methods =['GET', 'POST'])
 def permit():
 	try:
@@ -290,10 +288,7 @@ def permit():
 					return "Wrong Format"
 				now = datetime.datetime.now(pytz.timezone('Asia/Jakarta'))
 				date = now.strftime("%Y-%m-%d")
-				types = request.form['condition']
-				amount = int(request.form['amount'])
-				description = request.form['description']
-				cursor.execute('INSERT INTO reimbursement VALUES (NULL, %s, %s, %s, %s, %s, NULL)', (session['id'], date, types, amount, description))
+				cursor.execute('INSERT INTO log_employees VALUES (NULL, %s, NULL, NULL, %s, NULL)', (session['id'], date, ))
 				mysql.commit()
 				cursor.close()
 				mysql.close()
