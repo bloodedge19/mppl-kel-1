@@ -243,11 +243,11 @@ def reimbursement():
 				if file_ext not in app.config['UPLOAD_EXTENSIONS']:
 					return "Wrong Format"
 				now = datetime.datetime.now(pytz.timezone('Asia/Jakarta'))
-				date = now.strftime("%Y-%m-%d")
+				date = now.strftime("%Y-%m-%d %H:%M:%S")
 				types = request.form['condition']
 				amount = int(request.form['amount'])
 				description = request.form['description']
-				cursor.execute('INSERT INTO reimbursement VALUES (NULL, %s, %s, %s, %s, %s, NULL)', (session['id'], date, types, amount, description))
+				cursor.execute('INSERT INTO reimbursement VALUES (NULL, %s, %s, %s, %s, %s, 1)', (session['id'], types, date, amount, description))
 				mysql.commit()
 				cursor.close()
 				mysql.close()
@@ -256,6 +256,19 @@ def reimbursement():
 	except Exception as e:
 		print(e)
 		return redirect(url_for('login'))
+
+@app.route("/get-reimbursement")
+def data_reimbursement():
+	mysql = db.connect()
+	cur = mysql.cursor()
+	cur.execute("SELECT * from reimbursement where employee_id = %s", (session['id'], ))
+	row_headers=[x[0] for x in cur.description] #this will extract row headers
+	rv = cur.fetchall()
+	print(rv)
+	json_data=[]
+	for result in rv:
+		json_data.append(dict(zip(row_headers,result)))
+	return json.dumps(json_data, default=str)
 
 @app.route("/permit", methods =['GET', 'POST'])
 def permit():

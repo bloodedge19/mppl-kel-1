@@ -101,6 +101,21 @@ INSERT INTO `payroll` VALUES (1,4,0);
 /*!40000 ALTER TABLE `payroll` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+DROP TABLE IF EXISTS `reimbursement`;
+CREATE TABLE `reimbursement` (
+  `reimbursement_id` int NOT NULL AUTO_INCREMENT,
+  `employee_id` int DEFAULT NULL,
+  `type` char(32) NOT NULL,
+  `date` datetime NOT NULL,
+  `amount` int NOT NULL,
+  `description` text NOT NULL,
+  `status` ENUM("Waiting", "Approved", "Rejected") NOT NULL,
+  PRIMARY KEY (`reimbursement_id`),
+  KEY `employee_id` (`employee_id`),
+  CONSTRAINT `reimbursement_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`)
+);
+
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
