@@ -253,6 +253,39 @@ def reimbursement():
 		print(e)
 		return redirect(url_for('login'))
 
+@app.route("/reimbursement2", methods =['GET', 'POST'])
+def reimbursement2():
+	try:
+		if (request.method == 'GET'): 
+			if session['loggedin'] != None:
+				return render_template('contoh_upload.html')
+			else:
+				return redirect(url_for('login'))
+		elif (request.method == 'POST'):
+			print(request.form, flush=True)
+			uploaded_file = request.files['file']
+			filename = secure_filename(uploaded_file.filename)
+			if filename != '':
+				mysql = db.connect()
+				cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
+				file_ext = os.path.splitext(filename)[1]
+				if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+					return "Wrong Format"
+				now = datetime.datetime.now(pytz.timezone('Asia/Jakarta'))
+				date = now.strftime("%Y-%m-%d %H:%M:%S")
+				types = request.form['condition']
+				amount = int(request.form['amount'])
+				description = request.form['description']
+				cursor.execute('INSERT INTO reimbursement VALUES (NULL, %s, %s, %s, %s, %s, 1)', (session['id'], types, date, amount, description))
+				mysql.commit()
+				cursor.close()
+				mysql.close()
+				uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
+			return "Success"
+	except Exception as e:
+		print(e)
+		return redirect(url_for('login'))
+
 @app.route("/get-reimbursement")
 def data_reimbursement():
 	mysql = db.connect()

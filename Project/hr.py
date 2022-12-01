@@ -87,17 +87,19 @@ def get_payroll():
 def register():
 	try:
 		if request.method == 'POST':
+			print(session, flush=True)
 			if(session['HR'] != 1):
 				return redirect(url_for('dashboard'))
 			else:
 				msg = ''
 				mysql = db.connect()
 				data = request.form.to_dict()
-				print(data)
+				print(data, flush=True)
 				password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
 				cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
 				cursor.execute('SELECT * FROM employees WHERE email = %s or employee_id = %s', (data['email'], data['employee_id'], ))
 				account = cursor.fetchone()
+				print(account, flush=True)
 				if account:
 					msg = 'Account already exists !'
 				elif not re.match(r'[^@]+@[^@]+\.[^@]+', data['email']):
