@@ -14,7 +14,7 @@ import time
 
 def calculate(emp_id):
 	try:
-		standard = 0
+		standard = 8*3600 #standard working hours
 		mysql = db.connect()
 		cursor = mysql.cursor(MySQLdb.cursors.DictCursor)
 		now = datetime.datetime.now(pytz.timezone('Asia/Jakarta'))
@@ -24,7 +24,7 @@ def calculate(emp_id):
 		print(rv['working_hours'], flush=True)
 		sec = time.strptime(str(rv['working_hours']), "%H:%M:%S")
 		sec = int(datetime.timedelta(hours=sec.tm_hour,minutes=sec.tm_min,seconds=sec.tm_sec).total_seconds())
-		if(sec - standard > 0):
+		if(sec - standard > 0): #if overtime
 			res = sec - standard
 			ovt_salary = int(((res/sec) / 100) * 12000000)
 			print(res, ovt_salary, flush=True)
